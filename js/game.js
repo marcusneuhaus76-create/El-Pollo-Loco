@@ -17,4 +17,5 @@ function init() {
     ctx = canvas.getContext('2d');
 
    console.log('My Character is', world.character);
+   console.log('My Chicken are', world.chicken);
 }

@@ -2,11 +2,12 @@ class World {
 
 
 character = new Character();
-enemies = [
+chicken = new Chicken();
+/* enemies = [
     new Chicken(),
     new Chicken(),
     new Chicken(),
-];
+]; */
 
 
 
