@@ -25,15 +25,26 @@ function init() {
 
 */
 
+/*  9 - Character anzeigen
+
+
 let canvas;
 let ctx;
+let world = new World();
+
+Bislang haben wir
+
+*/
+
+let canvas;
+// let ctx; Die Context-Variable wird herausgenommen und in die World-KLasse übergeben.
 let world;
 
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World();
+   canvas = document.getElementById('canvas');
+   world = new World(canvas);
+    
 
-   
     console.log('My Character is', world.character);
 
 }
