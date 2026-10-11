@@ -11,6 +11,9 @@ enemies = [
 // enemy = new Chicken();
 
 //09: ctx und constructor werden hinzugefügt
+clouds = [ 
+    new Cloud()
+];
 canvas;
 ctx;
 
@@ -26,6 +29,10 @@ constructor(canvas) {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.enemies.forEach(enemy => { // forEach() wird verwendet, um jedes Element im enemies-Array zu durchlaufen und die drawImage()-Methode für jedes Enemy-Objekt aufzurufen.
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+
+        this.clouds.forEach(cloud => { 
+            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
 
         // Draw() wird immer wieder aufgerufen, um die Animation zu erstellen. 
