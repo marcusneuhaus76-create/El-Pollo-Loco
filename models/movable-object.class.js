@@ -17,7 +17,7 @@ class MovableObject {
         arr.forEach((path) => {
             let img = new Image(); //
             img.src = path;
-            this.imageCache[path] = path; // imageCache ist ein globales Objekt, das die geladenen Bilder speichert
+            this.imageCache[path] = img; // imageCache ist ein globales Objekt, das die geladenen Bilder speichert
             });
     }
 
