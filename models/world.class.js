@@ -3,6 +3,8 @@ class World {
 
 character = new Character();
 chicken = new Chicken();
+air = [
+     new air() ];
 enemies = [
     new Chicken(),
     new Chicken(),
@@ -14,8 +16,8 @@ enemies = [
 clouds = [ 
     new Cloud()
 ];
-deserts = [
-    new desert()
+backgroundObjects = [
+    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0, 0),
 ];
 canvas;
 ctx;
@@ -29,13 +31,17 @@ constructor(canvas) {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clearRect() löscht den Canvas-Bereich, um die vorherige Zeichnung zu entfernen und Platz für die neue Zeichnung zu schaffen.
        
+     /*    this.air.forEach(air => {
+            this.ctx.drawImage(air.img, air.x, air.y, air.width, air.height);
+        }); */
+
+       /*  this.deserts.forEach(desert => {
+            this.ctx.drawImage(desert.img, desert.x, desert.y, desert.width, desert.height);
+        });
+ */
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.enemies.forEach(enemy => { // forEach() wird verwendet, um jedes Element im enemies-Array zu durchlaufen und die drawImage()-Methode für jedes Enemy-Objekt aufzurufen.
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        });
-
-        this.deserts.forEach(desert => {
-            this.ctx.drawImage(desert.img, desert.x, desert.y, desert.width, desert.height);
         });
 
         this.clouds.forEach(cloud => { 
@@ -51,3 +57,4 @@ constructor(canvas) {
         // this.ctx.drawImage(this.enemy.img, this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
     }
 }
+

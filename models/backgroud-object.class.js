@@ -1,4 +1,12 @@
-class fixedObject {
+class BackgroundObject extends MovableObject {
+
+    constructor(imagePath) {
+        super().loadImage(imagePath);
+    }
+}
+
+
+/* class fixedObject {
  
 
     // I 08 Bilder einfügen
@@ -8,4 +16,4 @@ class fixedObject {
         this.img.src = path;
     }
 
-}
+} */
