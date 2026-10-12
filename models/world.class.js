@@ -17,6 +17,8 @@ clouds = [
 ];
 backgroundObjects = [
     new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0, 80),
+    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0, 80),
+    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0, 80),
 ];
 canvas;
 ctx;
@@ -36,10 +38,11 @@ constructor(canvas) {
             this.addToMap(cloud);
         });
  */
+        this.addObjectsToMap(this.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
-        this.addObjectsToMap(this.backgroundObjects);
+        
          
         let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
         requestAnimationFrame(function() {
