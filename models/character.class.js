@@ -16,6 +16,10 @@
 } */
 
 class Character extends MovableObject {
+    y = 100;
+    height = 350;
+    width = 150;
+
 
     //I 08 Bilder einfügen
     constructor() { 

@@ -1,6 +1,9 @@
 class Chicken extends MovableObject {
-    y = 290; // 1) Kapitel 16:Wir können den Wert der y-Position hier festlegen, da alle Hühner auf derselben Höhe erscheinen sollen. Der y-Wert von 280
+    y = 330; // 1) Kapitel 16:Wir können den Wert der y-Position hier festlegen, da alle Hühner auf derselben Höhe erscheinen sollen. Der y-Wert von 280
             // von movableObject wird hier überschrieben.
+
+    height = 110;
+    width = 100;
 
 // 11 - Hühnchen platzieren
 
