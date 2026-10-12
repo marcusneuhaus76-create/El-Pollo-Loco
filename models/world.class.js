@@ -14,6 +14,9 @@ enemies = [
 clouds = [ 
     new Cloud()
 ];
+deserts = [
+    new desert()
+];
 canvas;
 ctx;
 
@@ -29,6 +32,10 @@ constructor(canvas) {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.enemies.forEach(enemy => { // forEach() wird verwendet, um jedes Element im enemies-Array zu durchlaufen und die drawImage()-Methode für jedes Enemy-Objekt aufzurufen.
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+
+        this.deserts.forEach(desert => {
+            this.ctx.drawImage(desert.img, desert.x, desert.y, desert.width, desert.height);
         });
 
         this.clouds.forEach(cloud => { 
