@@ -15,9 +15,10 @@ class Chicken extends MovableObject {
 
     constructor() { 
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png'); 
-        
+        this.loadImages(this.IMAGES_WALKING);
+
         this.x = 200 + Math.random() * 500; // Zufällige x-Position zwischen 200 und 600
-        this.loadImages(this.IMAGES_WALKING);  
+        this.speed = 0.15 + Math.random() * 0.25; // Zufällige Geschwindigkeit ab 0.15 bis 0.4, damit die Hühner unterschiedlich schnell laufen
     
         this.animate();
 
@@ -26,6 +27,9 @@ class Chicken extends MovableObject {
 
 
     animate() {
+        this.moveLeft();
+
+
             setInterval( () => {
             let i = this.currentImage % this.IMAGES_WALKING.length; // let i = 6 % 6 => Restwert 0, also wieder von vorne anfangen
             let path = this.IMAGES_WALKING[i];

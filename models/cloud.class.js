@@ -19,10 +19,10 @@ class Cloud extends MovableObject {
                 { this.x = this.x - 1;} */
         
         // this.y = 50 + Math.random() * 100;
-    moveLeft() {
+  /*   moveLeft() {
          setInterval( () => {        // Sorgt dafür, dass die Zeile z.B. jede Sekunde ausgeführt wird. Hir alle 1000ms = 1 Sekunde
             this.x -= 0.15; // Bewegt die Wolke nach links, indem die x-Position um 1 verringert wird
-            }, 1000 / 60); // 60 Frames pro Sekunde
-    }
+            }, 1000 / 60); // 60 Frames pro Sekunde */
+    
     
 }
