@@ -39,6 +39,7 @@ Bislang haben wir
 let canvas;
 // let ctx; Die Context-Variable wird herausgenommen und in die World-KLasse übergeben.
 let world;
+let keyboard = new Keyboard(); // 9 - Keyboard-Objekt erstellen
 
 function init() {
    canvas = document.getElementById('canvas');
@@ -49,3 +50,7 @@ function init() {
     // console.log('My Chicken is', world.enemy);
 
 }
+
+window.addEventListener("keypress", (e) => {
+    console.log(e);
+});
