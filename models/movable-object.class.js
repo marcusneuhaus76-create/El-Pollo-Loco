@@ -7,7 +7,7 @@ class MovableObject {
     imageCache = {}; // Wir nutzen ein Objekt, um die geladenen Bilder zu speichern, damit wir sie später wiederverwenden können. Hier ein JSON
     currentImage = 0; // Index des aktuellen Bildes in der Animation
     speed = 0.15; // Geschwindigkeit der Bewegung nach links
-
+    otherDirection = false;
 
     // I 08 Bilder einfügen
     //loadImage('img/test.png');

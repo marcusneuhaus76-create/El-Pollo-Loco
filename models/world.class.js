@@ -91,7 +91,15 @@ setWorld(){
 
 
     addToMap(mo) {
+        if(mo.otherDirection) {
+            this.ctx.save(); // Speichern der aktuellen Einstellungen, da wir diese später noch brauchen
+            this.ctx.translate(mo.img.width, 0); // Wir verändern die Methode, wie wir die Bilder einfügen
+            this.ctx.scale(-1, 1); // Umdrehen an der Y-Achse um zu spiegeln
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection)  {
+            this.ctx.restore(); // War die Direction geändert worden? Dann müssen wir die Einstellungen wieder herstellen
+        }
     }
 
 }
