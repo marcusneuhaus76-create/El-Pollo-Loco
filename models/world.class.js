@@ -24,6 +24,8 @@ backgroundObjects = [
 canvas;
 ctx; // ariable "context"
 keyboard;
+// camera_x = -100;  Wir wollen eine Verschiebung um 100px nach links
+camera_x = 0; // Statt mit 100 starten wir mit einer Kameraverschiebung von '0'
 
 
 constructor(canvas, keyboard) {
@@ -46,11 +48,16 @@ setWorld(){
         this.clouds.forEach(cloud => {
             this.addToMap(cloud);
         });
- */
+        */     
+       this.ctx.translate(this.camera_x, 0); // Verrschiebung camera_x auf X-Achse und 0 auf Y-Achse
+
+
         this.addObjectsToMap(this.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
+
+         this.ctx.translate(-this.camera_x, 0);
         
          
         let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
