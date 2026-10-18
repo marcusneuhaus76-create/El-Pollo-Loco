@@ -2,6 +2,7 @@ class World {
 
 
 character = new Character();
+level = level1;
 chicken = new Chicken();
 
 enemies = level1.enemies;  
