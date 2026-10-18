@@ -22,7 +22,20 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img; // imageCache ist ein globales Objekt, das die geladenen Bilder speichert
             });
+
     }
+
+
+    playAnimation(images) {
+        // Walk animation 
+        let i = this.currentImage % this.IMAGES_WALKING.length; // let i = 6 % 6 => Restwert 0, also wieder von vorne anfangen
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
+
 
     moveRight() {
         console.log('Moving right');
@@ -34,4 +47,6 @@ class MovableObject {
             this.x -= this.speed; // Bewegt die Wolke nach links, indem die x-Position um 1 verringert wird
             }, 1000 / 60); // 60 Frames pro Sekunde
         }
- }
+    }
+
+ 
