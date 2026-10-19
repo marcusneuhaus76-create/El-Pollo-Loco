@@ -1,7 +1,7 @@
 class MovableObject {
     img;
     x = 120;
-    y = 280;
+    y = 480;
     height = 150;
     width = 100;
     imageCache = {}; // Wir nutzen ein Objekt, um die geladenen Bilder zu speichern, damit wir sie später wiederverwenden können. Hier ein JSON
@@ -22,7 +22,7 @@ class MovableObject {
 
 
     isAboveGround(){
-        return this.y < 180;
+        return this.y < 90;
     }
 
 
