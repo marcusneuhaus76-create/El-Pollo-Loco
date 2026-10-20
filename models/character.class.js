@@ -46,11 +46,18 @@ class Character extends MovableObject {
                     this.otherDirection = false;
                 }
 
-                console.log(this.world.level.level_end_x);
+                //console.log(this.world.level.level_end_x);
                 if (this.world.keyboard.LEFT && this.x > 0) { // Character kommt nicht weiter nach links
                     this.x -= this.speed;
                     this.otherDirection = true;
                 }
+
+                //console.log('this.speedY', this.speedY);
+
+                if(this.world.keyboard.UP) {
+                    this.speedY = 20;
+                }
+
                 this.world.camera_x = - this.x + 100;
             }, 1000 / 60);
 
