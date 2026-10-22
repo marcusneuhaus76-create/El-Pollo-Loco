@@ -1,5 +1,5 @@
 class Cloud extends MovableObject {
-    y = 20;
+    y = -20;
     height = 250;
     width = 500;
 
@@ -11,9 +11,11 @@ class Cloud extends MovableObject {
         this.animate();
         }
 
-        animate() {
-           this.moveLeft();
-        }
+       animate() {
+         setInterval(() => {
+            this.moveLeft();
+         }, 1000 / 60);
+       } 
 
        /*      for (let i = this.x; i > 0; i--) 
                 { this.x = this.x - 1;} */
@@ -25,4 +27,4 @@ class Cloud extends MovableObject {
             }, 1000 / 60); // 60 Frames pro Sekunde */
     
     
-}
+      }

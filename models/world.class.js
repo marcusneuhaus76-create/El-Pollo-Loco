@@ -9,9 +9,7 @@ enemies = level1.enemies;
 // enemy = new Chicken();
 
 //09: ctx und constructor werden hinzugefügt
-clouds = [ 
-    
-];
+clouds = level1.clouds;
 backgroundObjects = level1.backgroundObjects;
 canvas;
 ctx; // ariable "context"
