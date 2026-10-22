@@ -86,7 +86,7 @@ setWorld(){
         // this.ctx.drawImage(this.enemy.img, this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
         }
 
-
+ 
     addToMap(mo) {
         if(mo.otherDirection) {
             this.ctx.save(); // Speichern der aktuellen Einstellungen, da wir diese später noch brauchen
@@ -95,6 +95,12 @@ setWorld(){
             mo.x = mo.x * -1; // Die X-Koordinate wird umgedreht
         }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle = "blue";
+        this.ctx.rect(mo.x, mo.y, mo.x + mo.width, mo.y + mo.height);
+        this.ctx.stroke();
+
         if (mo.otherDirection)  {
             mo.x = mo.x * -1; //
             this.ctx.restore(); // War die Direction geändert worden? Dann müssen wir die Einstellungen wieder herstellen
