@@ -27,7 +27,11 @@ class Chicken extends MovableObject {
 
 
     animate() {
-        this.moveLeft();
+         setInterval( () => {        
+           this.moveLeft();  
+            }, 1000 / 60); // 60 Frames pro Sekunde // Sorgt dafür, dass die Zeile z.B. jede Sekunde ausgeführt wird. Hir alle 1000ms = 1 Sekunde
+
+        
 
 
             setInterval( () => {
@@ -38,3 +42,4 @@ class Chicken extends MovableObject {
             }, 100);
     }   
 }
+

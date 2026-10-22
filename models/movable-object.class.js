@@ -11,6 +11,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 2.5;
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -32,6 +33,7 @@ class MovableObject {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src="img/image.png">
         this.img.src = path; // Mit der Eigenschaft "this" ist die Variable überall im Objekt gültig.
     }
+
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -55,15 +57,19 @@ class MovableObject {
 
 
     moveRight() {
-        console.log('Moving right');
+        this.x += this.speed;
+        this.otherDirection = false;
     }
 
 
       moveLeft() {
-         setInterval( () => {        // Sorgt dafür, dass die Zeile z.B. jede Sekunde ausgeführt wird. Hir alle 1000ms = 1 Sekunde
-            this.x -= this.speed; // Bewegt die Wolke nach links, indem die x-Position um 1 verringert wird
-            }, 1000 / 60); // 60 Frames pro Sekunde
+        this.x -= this.speed;
+        this.otherDirection = true;
         }
-    }
+    
 
- 
+
+    jump(){
+        this.speedY = 30;
+    }
+}
