@@ -34,6 +34,17 @@ class MovableObject {
         this.img.src = path; // Mit der Eigenschaft "this" ist die Variable überall im Objekt gültig.
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        ctx.beginPath(); // Beginnt eine neue Zeichnung aus Linien und Formen
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = "blue";
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
 
     loadImages(arr) {
         arr.forEach((path) => {

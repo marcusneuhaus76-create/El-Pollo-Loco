@@ -55,29 +55,7 @@ setWorld(){
             self.draw();
         });
     }
-
-       /*  this.backgroundObjects.forEach(bgo => {
-            this.addToMap(bgo);
-        }); */
-     /*    this.air.forEach(air => {
-            this.ctx.drawImage(air.img, air.x, air.y, air.width, air.height);
-        }); */
-
-       /*  this.deserts.forEach(desert => {
-            this.ctx.drawImage(desert.img, desert.x, desert.y, desert.width, desert.height);
-        });
- */
-        /* this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.enemies.forEach(enemy => { // forEach() wird verwendet, um jedes Element im enemies-Array zu durchlaufen und die drawImage()-Methode für jedes Enemy-Objekt aufzurufen.
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height); 
-        });*/
-
-       /*  this.clouds.forEach(cloud => { 
-            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height); 
-        });*/
-
-        // Draw() wird immer wieder aufgerufen, um die Animation zu erstellen. 
-      
+    
 
         addObjectsToMap(objects){
             objects.forEach(o => {
@@ -89,22 +67,27 @@ setWorld(){
  
     addToMap(mo) {
         if(mo.otherDirection) {
+            this.flipImage(mo);
+        }
+
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+
+
+        if (mo.otherDirection) {
+           this.flipImageBack(mo); 
+        }
+    }
+    
+        flipImage(mo) {
             this.ctx.save(); // Speichern der aktuellen Einstellungen, da wir diese später noch brauchen
             this.ctx.translate(mo.width, 0); // Wir verändern die Methode, wie wir die Bilder einfügen
             this.ctx.scale(-1, 1); // Umdrehen an der Y-Achse um zu spiegeln
             mo.x = mo.x * -1; // Die X-Koordinate wird umgedreht
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '5';
-        this.ctx.strokeStyle = "blue";
-        this.ctx.rect(mo.x, mo.y, mo.x + mo.width, mo.y + mo.height);
-        this.ctx.stroke();
 
-        if (mo.otherDirection)  {
-            mo.x = mo.x * -1; //
+        flipImageBack(mo) {
+             mo.x = mo.x * -1; //
             this.ctx.restore(); // War die Direction geändert worden? Dann müssen wir die Einstellungen wieder herstellen
         }
-    }
-
 }
