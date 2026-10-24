@@ -34,9 +34,11 @@ class MovableObject {
         this.img.src = path; // Mit der Eigenschaft "this" ist die Variable überall im Objekt gültig.
     }
 
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
+
 
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken) {
@@ -46,7 +48,15 @@ class MovableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
             }
-    }
+        }
+
+    // isColliding(chicken)
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height;
+        }
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -54,8 +64,7 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img; // imageCache ist ein globales Objekt, das die geladenen Bilder speichert
             });
-
-    }
+        }
 
 
     playAnimation(images) {
@@ -74,7 +83,7 @@ class MovableObject {
     }
 
 
-      moveLeft() {
+    moveLeft() {
         this.x -= this.speed;
         }
     

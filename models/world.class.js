@@ -1,21 +1,14 @@
 class World {
-
-
 character = new Character();
 level = level1;
 chicken = new Chicken();
-
-enemies = level1.enemies;  
-// enemy = new Chicken();
-
-//09: ctx und constructor werden hinzugefügt
+enemies = level1.enemies;  // enemy = new Chicken(); //09: ctx und constructor werden hinzugefügt
 clouds = level1.clouds;
 backgroundObjects = level1.backgroundObjects;
 canvas;
 ctx; // ariable "context"
 keyboard;
-// camera_x = -100;  Wir wollen eine Verschiebung um 100px nach links
-camera_x = 0; // Statt mit 100 starten wir mit einer Kameraverschiebung von '0'
+camera_x = 0; // camera_x = -100;  Wir wollen eine Verschiebung um 100px nach links// Statt mit 100 starten wir mit einer Kameraverschiebung von '0'
 
 
 constructor(canvas, keyboard) {
@@ -24,11 +17,23 @@ constructor(canvas, keyboard) {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    }
+    this.checkCollisions();
+}
 
 setWorld(){
     this.character.world = this;
-    }
+}
+
+checkCollisions() {
+    setInterval(() => {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) ) {
+                console.log('Collision with Caharacter', enemy);
+            }
+        });
+    }, 200); // alle 1000 Milisekunden
+}
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clearRect() löscht den Canvas-Bereich, um die vorherige Zeichnung zu entfernen und Platz für die neue Zeichnung zu schaffen.
