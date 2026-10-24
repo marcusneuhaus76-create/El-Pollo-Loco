@@ -28,7 +28,8 @@ checkCollisions() {
     setInterval(() => {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) ) {
-                console.log('Collision with Caharacter', enemy);
+                console.log('Collision with Caharacter, energy', this.character.energy);
+                this.character.energy -= 5;
             }
         });
     }, 200); // alle 1000 Milisekunden
