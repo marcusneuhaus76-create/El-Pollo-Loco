@@ -28,7 +28,11 @@ checkCollisions() {
     setInterval(() => {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) ) {
-                console.log('Collision with Caharacter, energy', this.character.energy);
+                console.log('Collision with Character, energy', this.character.energy);
+                console.log('Powerlevel > 0', this.character.checkEnergy(this.character.energy));
+                if( this.character.checkEnergy(this.character.energy) == false)   
+                    this.character.playAnimation(this.character.IMAGES_DYING);
+                else    
                 this.character.energy -= 5;
             }
         });

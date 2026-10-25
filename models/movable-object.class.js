@@ -59,6 +59,12 @@ class MovableObject {
             this.y < mo.y + mo.height;
         }
 
+    checkEnergy(powerlevel) {
+       return powerlevel > 0;
+    }
+
+   
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image(); //
@@ -77,8 +83,6 @@ class MovableObject {
     }
 
 
-
-
     moveRight() {
         this.x += this.speed;
     }
@@ -88,7 +92,6 @@ class MovableObject {
         this.x -= this.speed;
         }
     
-
 
     jump(){
         this.speedY = 30;
