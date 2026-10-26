@@ -70,10 +70,10 @@ class MovableObject {
     }
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timepassed = timepassed / 1000; // Difference in ms
+        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms seitdem wir zuletzt getroffen wurden
+        timepassed = timepassed / 1000; // Difference in ms: Umrechnung in Sekunden
         console.log(timepassed);
-        return timepassed < 1;
+        return timepassed < 1; // Ergibt entweder 'true' oder 'false'
     }
 
     isDead() {
