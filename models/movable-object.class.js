@@ -11,6 +11,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    lastHit = 0;
 
 
     applyGravity() {
@@ -59,11 +60,26 @@ class MovableObject {
             this.y < mo.y + mo.height;
         }
 
-    checkEnergy(powerlevel) {
-       return powerlevel > 0;
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime(); // Speichert Zeit in Zahlenform seit dem 01.01.1970
+        }
     }
 
-   
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
+        timepassed = timepassed / 1000; // Difference in ms
+        console.log(timepassed);
+        return timepassed < 1;
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+    
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -76,7 +92,7 @@ class MovableObject {
 
     playAnimation(images) {
         // Walk animation 
-        let i = this.currentImage % this.IMAGES_WALKING.length; // let i = 6 % 6 => Restwert 0, also wieder von vorne anfangen
+        let i = this.currentImage % images.length; // let i = 6 % 6 => Restwert 0, also wieder von vorne anfangen
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
@@ -97,3 +113,8 @@ class MovableObject {
         this.speedY = 30;
     }
 }
+
+/* checkEnergy(powerlevel) {
+       return powerlevel > 0;
+    }
+*/
