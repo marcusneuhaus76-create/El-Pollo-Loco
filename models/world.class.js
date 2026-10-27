@@ -9,7 +9,7 @@ canvas;
 ctx; // ariable "context"
 keyboard;
 camera_x = 0; // camera_x = -100;  Wir wollen eine Verschiebung um 100px nach links// Statt mit 100 starten wir mit einer Kameraverschiebung von '0'
-
+statusBar = new StatusBar(); 
 
 constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -52,9 +52,9 @@ draw() {
         this.addToMap(this.character);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
-
         this.ctx.translate(-this.camera_x, 0);
         
+        this.addToMap(this.statusBar, 120, 480);
          
         let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
         requestAnimationFrame(function() {
