@@ -8,8 +8,10 @@ backgroundObjects = level1.backgroundObjects;
 canvas;
 ctx; // ariable "context"
 keyboard;
-camera_x = 0; // camera_x = -100;  Wir wollen eine Verschiebung um 100px nach links// Statt mit 100 starten wir mit einer Kameraverschiebung von '0'
-statusBar = new StatusBar();
+statusBar = new StatusBar('health', 0, 100);
+bottleBar = new StatusBar('bottle', 50, 100);
+coinBar = new StatusBar('coin', 100, 100);
+
 
 constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -29,7 +31,7 @@ checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                console.log('Collision with Character, energy', this.character.energy)
+                this.statusBar.setPercentage(this.character.energy)
             }
         });
     }, 200); // alle 200 Milisekunden
@@ -45,31 +47,36 @@ draw() {
             this.addToMap(cloud);
         });
         */     
-       this.ctx.translate(this.camera_x, 0); // Verrschiebung camera_x auf X-Achse und 0 auf Y-Achse
+    this.ctx.translate(this.camera_x, 0); // Verrschiebung camera_x auf X-Achse und 0 auf Y-Achse
+    this.addObjectsToMap(this.backgroundObjects);
 
+    this.ctx.translate(-this.camera_x, 0); //Back
+    // Spaced fpr fixed objects
+    this.addToMap(this.statusBar);
+    this.addToMap(this.bottleBar);
+    this.addToMap(this.coinBar);
+    this.ctx.translate(this.camera_x, 0); //Forwards
+    
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.clouds);
+    this.addObjectsToMap(this.enemies);
 
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
-
-        this.ctx.translate(-this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
+    
         
-         
-        let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
-        requestAnimationFrame(function() {
-            self.draw();
+    let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
+    requestAnimationFrame(function() {
+        self.draw();
         });
     }
     
 
-        addObjectsToMap(objects){
-            objects.forEach(o => {
-                this.addToMap(o);
-            });
-        // this.ctx.drawImage(this.enemy.img, this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
-        }
+    addObjectsToMap(objects){
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
+    // this.ctx.drawImage(this.enemy.img, this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
+    }
 
  
     addToMap(mo) {
