@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
 
-    applyGravity() {
+    applyGravity() { 
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
             this.y -= this.speedY;
@@ -19,10 +19,14 @@ class MovableObject extends DrawableObject {
     }
 
 
-    isAboveGround(){
-        return this.y < 90;
-    }
-  
+   isAboveGround() {
+        if (this instanceof ThrowableObject) { //Throwable object should always fall
+            return true;
+        } else {
+        return this.y < 80;
+        }   
+    }   
+   
 
    
      // isColliding(chicken)

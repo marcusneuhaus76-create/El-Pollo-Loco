@@ -11,6 +11,7 @@ keyboard;
 statusBar = new StatusBar('health', 0, 100);
 bottleBar = new StatusBar('bottle', 50, 100);
 coinBar = new StatusBar('coin', 100, 100);
+throwableObjects = [];
 
 
 constructor(canvas, keyboard) {
@@ -19,34 +20,41 @@ constructor(canvas, keyboard) {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
 }
 
 setWorld() {
     this.character.world = this;
 }
 
-checkCollisions() {
+run() {
     setInterval(() => {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy)
-            }
-        });
+        
+        this.checkCollisions();  
+        this.checkThrowObjects();      
     }, 200); // alle 200 Milisekunden
 }
 
+checkThrowObjects() {
+    if (this.keyboard.D) {
+        let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); 
+        this.throwableObjects.push(bottle);
+        }
+    }
+
+
+checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy)
+        }
+    });
+}
 
 draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clearRect() löscht den Canvas-Bereich, um die vorherige Zeichnung zu entfernen und Platz für die neue Zeichnung zu schaffen.
-       /*  this.enemies.forEach(enemy => { // forEach() wird verwendet, um jedes Element im enemies-Array zu durchlaufen und die drawImage()-Methode für jedes Enemy-Objekt aufzurufen.
-            this.addToMap(enemy);
-        });
-        this.clouds.forEach(cloud => {
-            this.addToMap(cloud);
-        });
-        */     
+        
     this.ctx.translate(this.camera_x, 0); // Verrschiebung camera_x auf X-Achse und 0 auf Y-Achse
     this.addObjectsToMap(this.backgroundObjects);
 
@@ -60,6 +68,7 @@ draw() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.clouds);
     this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.throwableObjects)
 
     this.ctx.translate(-this.camera_x, 0);
     
