@@ -4,6 +4,8 @@ class Character extends MovableObject {
     y = -100;
     width = 150;
     speed = 10;
+    walkSound = new Audio('audio/walk.ogg');
+    
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -65,12 +67,14 @@ class Character extends MovableObject {
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
+                    this.walkSound.play();
                 }
 
                 //console.log(this.world.level.level_end_x);
                 if (this.world.keyboard.LEFT && this.x > 0) { // Character kommt nicht weiter nach links
                     this.moveLeft();
                     this.otherDirection = true;
+                    this.walkSound.play(); 
                 }
 
                 //console.log('this.speedY', this.speedY);
