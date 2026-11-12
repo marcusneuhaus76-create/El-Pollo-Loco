@@ -33,6 +33,8 @@ run() {
         this.checkCollisions();  
         this.checkThrowObjects();   
         this.checkBottleHits();
+        this.checkIdle(this.character.isIdle());
+
            
     }, 200); // alle 200 Milisekunden
 }
@@ -54,7 +56,19 @@ checkCollisions() {
     });
 }
 
+checkIdle(isIdle) {
+    console.log('isIdle', isIdle); 
+    if (isIdle > 3 && isIdle < 6) {
+        this.character.playAnimation(this.character.IMAGES_IDLE);
+        console.log('Character is idle');
+        }
+    else if (isIdle > 6) {
+        this.character.playAnimation(this.character.IMAGES_LONG_IDLE);
+        console.log('Character is long idle');
+    }
+}
 
+    
 checkBottleHits() {
     this.throwableObjects.forEach((bottle) => {
         this.level.enemies.forEach((enemy) => {
@@ -78,7 +92,6 @@ draw() {
     this.addToMap(this.bottleBar);
     this.addToMap(this.coinBar);
     this.ctx.translate(this.camera_x, 0); //Forwards
-    
     this.addToMap(this.character);
     this.addObjectsToMap(this.clouds);
     this.addObjectsToMap(this.enemies);

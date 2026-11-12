@@ -7,6 +7,8 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    lastmove = new Date().getTime();
+    idle = false;
 
 
     applyGravity() { 
@@ -37,6 +39,7 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height;
         }
 
+  
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -56,7 +59,20 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
+        
+
+    move() {
+        this.lastmove = new Date().getTime();
+        console.log('lastmove', this.lastmove);
+    }
     
+
+    isIdle() {
+        let movetimepassed = new Date().getTime() - this.lastmove; // Difference in ms seitdem wir zuletzt getroffen wurden
+        movetimepassed = movetimepassed / 1000; // Difference in ms: Umrechnung in Sekunden
+        console.log('Movetimepassed', movetimepassed);
+        return movetimepassed; // Ergibt entweder 'true' oder 'false'
+    }
 
     
 
@@ -71,9 +87,7 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
-          this.jump();
-                this.jump_sound.play();
-    }
+        }
 
 
     moveLeft() {

@@ -1,8 +1,15 @@
+function createChickens(min, max) {
+    let count = min + Math.floor(Math.random() * (max - min + 1));
+    let chickens = [];
+    for (let i = 0; i < count; i++) {
+        chickens.push(new Chicken());
+    }
+    return chickens;
+}
+
 const level1 = new Level(
     [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
+    ...createChickens(3, 8),
     new Endboss(),
 ],
 [
