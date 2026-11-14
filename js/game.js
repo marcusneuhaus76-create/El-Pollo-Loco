@@ -55,35 +55,31 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = false;
         world.character.move();
-
         console.log('Character is moving', world.character.lastmove);
     }
 
     if (e.keyCode == 38) {
         keyboard.UP = false;
         world.character.move();
-
         console.log('Character is moving', world.character.lastmove);
     }
 
      if (e.keyCode == 40) {
         keyboard.DOWN = false;
         world.character.move();
-
         console.log('Character is moving', world.character.lastmove);
     }
 
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
         world.character.move();
-
         console.log('Character is moving', world.character.lastmove);
     }
 
     if (e.keyCode == 68) {
         keyboard.D = false;
         world.character.move();
-
+        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         console.log('Character is moving', world.character.lastmove);
     }
 

@@ -71,6 +71,8 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-20.png'
      ];
 
+   
+
     world;
     // currentImage = 0;  Index des aktuellen Bildes in der Animation
 
