@@ -6,6 +6,8 @@ class Character extends MovableObject {
     speed = 10;
     walkSound = new Audio('audio/walk.ogg');
     snoreSound = new Audio('audio/snorring.wav');
+    hurtSound = new Audio('audio/shortoww.wav');
+    dieSound = new Audio('audio/die.wav');
     
     
 
@@ -137,9 +139,11 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.setState('dead');
                 this.playAnimation(this.IMAGES_DEAD);
+                this.dieSound.play();
             } else if (this.isHurt()) {
                 this.setState('hurt');
                 this.playAnimation(this.IMAGES_HURT);
+                this.hurtSound.play();
             } else if (this.isAboveGround()) {
                 this.setState('jumping');
                 this.playAnimation(this.IMAGES_JUMPING);
