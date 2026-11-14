@@ -5,6 +5,8 @@ class Character extends MovableObject {
     width = 150;
     speed = 10;
     walkSound = new Audio('audio/walk.ogg');
+    snoreSound = new Audio('audio/snorring.wav');
+    
     
 
     IMAGES_WALKING = [
@@ -90,6 +92,17 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    setState(newState) {
+        if (this.state !== newState) { 
+             if (this.state === 'long_idle') {
+                this.snoreSound.pause();          // Schnarchen anhalten
+                this.snoreSound.currentTime = 0;
+             }
+            this.state = newState;
+            this.currentImage = 0;   // Animation von vorne beginnen
+        }
+    }
+
         animate() {
 
             setInterval(() => {
@@ -122,16 +135,23 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
+                this.setState('dead');
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
+                this.setState('hurt');
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
+                this.setState('jumping');
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isIdle() >= 6) {
+                this.setState('long_idle');
                 this.playAnimation(this.IMAGES_LONG_IDLE);
+                this.snoreSound.play();
             } else if (this.isIdle() > 3) {
+                this.setState('idle');
                 this.playAnimation(this.IMAGES_IDLE);
             }
     }, 60);

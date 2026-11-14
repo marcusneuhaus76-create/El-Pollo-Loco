@@ -79,7 +79,7 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 68) {
         keyboard.D = false;
         world.character.move();
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        world.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
         console.log('Character is moving', world.character.lastmove);
     }
 
