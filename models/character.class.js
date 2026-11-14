@@ -8,6 +8,7 @@ class Character extends MovableObject {
     snoreSound = new Audio('audio/snorring.wav');
     hurtSound = new Audio('audio/shortoww.wav');
     dieSound = new Audio('audio/die.wav');
+    jumpSound = new Audio('audio/cartoonjump.wav');
     
     
 
@@ -39,7 +40,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-54.png',
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png'
+        'img/2_character_pepe/5_dead/D-57.png',   
     ];
 
     IMAGES_HURT = [
@@ -147,6 +148,7 @@ class Character extends MovableObject {
             } else if (this.isAboveGround()) {
                 this.setState('jumping');
                 this.playAnimation(this.IMAGES_JUMPING);
+                this.jumpSound.play();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);

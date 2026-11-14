@@ -12,6 +12,7 @@ statusBar = new StatusBar('health', 0, 100);
 bottleBar = new StatusBar('bottle', 50, 100);
 coinBar = new StatusBar('coin', 100, 100);
 throwableObjects = [];
+hitSound = new Audio('audio/glasssmash.wav');
 
 
 constructor(canvas, keyboard) {
@@ -74,6 +75,7 @@ checkBottleHits() {
         this.level.enemies.forEach((enemy) => {
             if (bottle.isColliding(enemy)) {
                 enemy.hit();
+                this.hitSound.play();
                 console.log('Enemy hit');
             }
         });
