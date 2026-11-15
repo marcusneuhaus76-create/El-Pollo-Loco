@@ -5,6 +5,7 @@ class ThrowableObject extends MovableObject {
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png'); 
         this.loadImages(this.IMAGES_BOTTLEROTATION);  
+        this.loadImages(this.IMAGES_BOTTLE_SPLASH);  
         this.bottleanimate();
         this.x = x;
         this.y = y;
@@ -37,6 +38,15 @@ class ThrowableObject extends MovableObject {
     ];
 
 
+    IMAGES_BOTTLE_SPLASH = [
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
+    ];
+
 
     bottleanimate() {
         this.soundBottle.play(); 
@@ -47,4 +57,28 @@ class ThrowableObject extends MovableObject {
            
         }, 60);
     }   
+
+    bottlesplash() {
+            
+            setInterval(() => {
+                
+                    this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            
+            }, 60);
+        } 
+    
+    
+ /*    bottlesplash() {
+            if (this.isSplashing) return;      // nur einmal starten
+            this.isSplashing = true;
+            clearInterval(this.rotationInterval);
+            clearInterval(this.moveInterval);
+            this.speedY = 0;
+            this.acceleration = 0;             // Flasche bleibt an der Stelle
+            this.currentImage = 0;
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            }, 60);
+        } */
+
 }

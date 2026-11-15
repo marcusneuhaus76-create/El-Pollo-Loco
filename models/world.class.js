@@ -73,10 +73,12 @@ checkIdle(isIdle) {
 checkBottleHits() {
     this.throwableObjects.forEach((bottle) => {
         this.level.enemies.forEach((enemy) => {
-            if (bottle.isColliding(enemy)) {
+            if (!bottle.isSplashing && bottle.isColliding(enemy)){
                 enemy.hit();
+                bottle.bottlesplash();
                 this.hitSound.play();
                 console.log('Enemy hit');
+                
             }
         });
     });
