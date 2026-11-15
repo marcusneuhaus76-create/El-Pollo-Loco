@@ -13,10 +13,20 @@ bottleBar = new StatusBar('bottle', 50, 100);
 coinBar = new StatusBar('coin', 100, 100);
 throwableObjects = [];
 hitSound = new Audio('audio/glasssmash.wav');
+//gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
 
+IMAGES_GAMEOVER = [
+    'img/You won, you lost/Game over A.png',
+    'img/You won, you lost/Game over.png',
+    'img/You won, you lost/You lost b.png',
+    'img/You won, you lost/You lost.png'
+];
+gameOverScreen = new Overlay(this.IMAGES_GAMEOVER);
 
 constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
+    //this.gameOverImage.src = 'img/9_intro_outro_screens/game_over/game over.png';
+    //this.loadImages(this.IMAGES_GAMEOVER);
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
@@ -103,7 +113,11 @@ draw() {
 
     this.ctx.translate(-this.camera_x, 0);
     
-        
+    if (this.character.isDead()) {
+        this.gameOverScreen.start();
+        this.addToMap(this.gameOverScreen);
+        }
+
     let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
     requestAnimationFrame(function() {
         self.draw();

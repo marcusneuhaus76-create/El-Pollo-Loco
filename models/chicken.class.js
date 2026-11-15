@@ -31,8 +31,6 @@ class Chicken extends MovableObject {
            this.moveLeft();  
             }, 1000 / 60); // 60 Frames pro Sekunde // Sorgt dafür, dass die Zeile z.B. jede Sekunde ausgeführt wird. Hir alle 1000ms = 1 Sekunde
 
-        
-
 
             setInterval( () => {
             let i = this.currentImage % this.IMAGES_WALKING.length; // let i = 6 % 6 => Restwert 0, also wieder von vorne anfangen
