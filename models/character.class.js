@@ -107,7 +107,6 @@ class Character extends MovableObject {
     }
 
         animate() {
-
             setInterval(() => {
                 
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -138,9 +137,12 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
-                this.setState('dead');
-                this.playAnimation(this.IMAGES_DEAD);
-                this.dieSound.play();
+                if (this.state !== 'dead') {
+                    this.dieSound.play();
+                    
+                    this.setState('dead');
+                    this.playAnimation(this.IMAGES_DEAD);
+                }
             } else if (this.isHurt()) {
                 this.setState('hurt');
                 this.playAnimation(this.IMAGES_HURT);

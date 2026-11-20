@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     lastmove = new Date().getTime();
     idle = false;
+    isRemoved = false; // Flag to indicate if the object is removed from the game
 
 
     applyGravity() { 

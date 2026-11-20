@@ -21,6 +21,7 @@ IMAGES_GAMEOVER = [
     'img/You won, you lost/You lost b.png',
     'img/You won, you lost/You lost.png'
 ];
+
 gameOverScreen = new Overlay(this.IMAGES_GAMEOVER);
 
 constructor(canvas, keyboard) {
@@ -34,21 +35,21 @@ constructor(canvas, keyboard) {
     this.run();
 }
 
+
 setWorld() {
     this.character.world = this;
 }
 
+
 run() {
     setInterval(() => {
-        
         this.checkCollisions();  
         this.checkThrowObjects();   
         this.checkBottleHits();
-        this.checkIdle(this.character.isIdle());
-
-           
+        this.checkIdle(this.character.isIdle());   
     }, 200); // alle 200 Milisekunden
 }
+
 
 checkThrowObjects() {
     if (this.keyboard.D) {
@@ -66,6 +67,7 @@ checkCollisions() {
         }
     });
 }
+
 
 checkIdle(isIdle) {
     console.log('isIdle', isIdle); 
@@ -87,12 +89,12 @@ checkBottleHits() {
                 enemy.hit();
                 bottle.bottlesplash();
                 this.hitSound.play();
-                console.log('Enemy hit');
-                
+                console.log('Enemy hit');            
             }
         });
     });
 }
+
 
 draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clearRect() löscht den Canvas-Bereich, um die vorherige Zeichnung zu entfernen und Platz für die neue Zeichnung zu schaffen.
@@ -110,10 +112,11 @@ draw() {
     this.addObjectsToMap(this.clouds);
     this.addObjectsToMap(this.enemies);
     this.addObjectsToMap(this.throwableObjects)
-
     this.ctx.translate(-this.camera_x, 0);
     
     if (this.character.isDead()) {
+        this.character.isRemoved = true; 
+        this.enemies.forEach(enemy => enemy.isRemoved = true);  // Set the isRemoved flag to true for the chicken
         this.gameOverScreen.start();
         this.addToMap(this.gameOverScreen);
         }
@@ -134,25 +137,26 @@ draw() {
 
  
     addToMap(mo) {
+        if(mo.isRemoved) return; // Wenn das Objekt entfernt wurde, wird es nicht mehr gezeichnet
         if(mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
-
 
         if (mo.otherDirection) {
            this.flipImageBack(mo); 
         }
     }
     
+
     flipImage(mo) {
         this.ctx.save(); // Speichern der aktuellen Einstellungen, da wir diese später noch brauchen
         this.ctx.translate(mo.width, 0); // Wir verändern die Methode, wie wir die Bilder einfügen
         this.ctx.scale(-1, 1); // Umdrehen an der Y-Achse um zu spiegeln
         mo.x = mo.x * -1; // Die X-Koordinate wird umgedreht
         }
+
 
     flipImageBack(mo) {
         mo.x = mo.x * -1; //

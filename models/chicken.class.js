@@ -10,6 +10,7 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];  
     currentImage = 0;
+    isRemoved = false; 
 
 // 11 - Hühnchen platzieren
 
@@ -21,7 +22,6 @@ class Chicken extends MovableObject {
         this.speed = 0.15 + Math.random() * 0.25; // Zufällige Geschwindigkeit ab 0.15 bis 0.4, damit die Hühner unterschiedlich schnell laufen
     
         this.animate();
-
     }
 
 
