@@ -3,6 +3,7 @@ character = new Character();
 level = level1;
 chicken = new Chicken();
 enemies = level1.enemies;  // enemy = new Chicken(); //09: ctx und constructor werden hinzugefügt
+endboss = level1.enemies.find(enemy => enemy instanceof Endboss);
 clouds = level1.clouds;
 backgroundObjects = level1.backgroundObjects;
 canvas;
@@ -16,13 +17,22 @@ hitSound = new Audio('audio/glasssmash.wav');
 //gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
 
 IMAGES_GAMEOVER = [
-    'img/You won, you lost/Game over A.png',
-    'img/You won, you lost/Game over.png',
     'img/You won, you lost/You lost b.png',
-    'img/You won, you lost/You lost.png'
+    'img/You won, you lost/Game over.png',
+    'img/You won, you lost/Game over A.png',
 ];
 
+IMAGES_WON = [
+    'img/You won, you lost/You win A.png',
+    'img/You won, you lost/You win B.png',
+    'img/You won, you lost/You won A.png',
+    'img/You won, you lost/You Won B.png',
+];
+
+
 gameOverScreen = new Overlay(this.IMAGES_GAMEOVER);
+
+gameWonScreen = new Overlay(this.IMAGES_WON);
 
 constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -30,8 +40,8 @@ constructor(canvas, keyboard) {
     //this.loadImages(this.IMAGES_GAMEOVER);
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.draw();
     this.setWorld();
+    this.draw();
     this.run();
 }
 
@@ -117,9 +127,24 @@ draw() {
     if (this.character.isDead()) {
         this.character.isRemoved = true; 
         this.enemies.forEach(enemy => enemy.isRemoved = true);  // Set the isRemoved flag to true for the chicken
-        this.gameOverScreen.start();
+        this.gameOverScreen.startend();
         this.addToMap(this.gameOverScreen);
         }
+
+    if (this.endboss.isDead() && !this.winTimerStarted) {
+        this.winTimerStarted = true;
+        setTimeout(() => {
+            this.gameWon = true;
+            this.character.isRemoved = true;
+            this.endboss.isRemoved = true;
+        }, 2000);
+    }
+
+    if (this.gameWon) {
+        this.gameWonScreen.start();            // Bilderwechsel starten (nur einmal, dank this.started)
+        this.addToMap(this.gameWonScreen);     // in jedem Frame zeichnen
+    }
+
 
     let self = this; // this ist nicht mehr verfügbar, da es sich auf die draw()-Methode bezieht. Daher wird self erstellt, um auf die World-Klasse zuzugreifen.
     requestAnimationFrame(function() {
@@ -142,7 +167,7 @@ draw() {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx  );
 
         if (mo.otherDirection) {
            this.flipImageBack(mo); 

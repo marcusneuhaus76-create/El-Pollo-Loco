@@ -75,6 +75,16 @@ class MovableObject extends DrawableObject {
         return movetimepassed; // Ergibt entweder 'true' oder 'false'
     }
 
+    setState(newState) {
+        if (this.state !== newState) { 
+             if (this.state === 'long_idle') {
+                this.snoreSound.pause();          // Schnarchen anhalten
+                this.snoreSound.currentTime = 0;
+             }
+            this.state = newState;
+            this.currentImage = 0;   // Animation von vorne beginnen
+        }
+    }
     
 
     playAnimation(images) {

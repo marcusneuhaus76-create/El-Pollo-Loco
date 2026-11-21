@@ -18,4 +18,14 @@ class Overlay extends MovableObject {
             this.playAnimation(this.images);
         }, 500);                           // alle 0,5 s nächstes Bild
     }
+
+    startend() {
+        if (this.started) return;          // nur einmal starten
+        this.started = true;
+        this.currentImage = 0;
+        this.animationInterval = setInterval(() => {
+            this.playAnimation(this.images);
+        }, 5000);                           // alle 0,5 s nächstes Bild
+    }
 }
+

@@ -95,17 +95,6 @@ class Character extends MovableObject {
         this.animate();
     }
 
-    setState(newState) {
-        if (this.state !== newState) { 
-             if (this.state === 'long_idle') {
-                this.snoreSound.pause();          // Schnarchen anhalten
-                this.snoreSound.currentTime = 0;
-             }
-            this.state = newState;
-            this.currentImage = 0;   // Animation von vorne beginnen
-        }
-    }
-
         animate() {
             setInterval(() => {
                 
@@ -139,7 +128,6 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 if (this.state !== 'dead') {
                     this.dieSound.play();
-                    
                     this.setState('dead');
                     this.playAnimation(this.IMAGES_DEAD);
                 }
@@ -149,8 +137,7 @@ class Character extends MovableObject {
                 this.hurtSound.play();
             } else if (this.isAboveGround()) {
                 this.setState('jumping');
-                this.playAnimation(this.IMAGES_JUMPING);
-                this.jumpSound.play();
+                this.playAnimation(this.IMAGES_JUMPING); 
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);
@@ -168,6 +155,7 @@ class Character extends MovableObject {
 
     jump() {
         this.speedY = 30;
+        this.jumpSound.play();
    }
 } 
 
