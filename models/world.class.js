@@ -15,8 +15,8 @@ coinBar = new StatusBar('coin', 100, 100);
 throwableObjects = [];
 hitSound = new Audio('audio/glasssmash.wav');
 
-gameOverSound = new Audio('audio/game_over.flac');
-//gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
+gameOverSound = new Audio('audio/game_over.flac'); //gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
+gameWonSound = new Audio('audio/te-deum.ogg');
 
 IMAGES_GAMEOVER = [
     'img/You won, you lost/You lost b.png',
@@ -144,7 +144,8 @@ draw() {
     }
 
     if (this.gameWon) {
-        this.gameWonScreen.start();            // Bilderwechsel starten (nur einmal, dank this.started)
+        this.gameWonScreen.start();   
+        this.gameWonSound.play();         // Bilderwechsel starten (nur einmal, dank this.started)
         this.addToMap(this.gameWonScreen);     // in jedem Frame zeichnen
     }
 
