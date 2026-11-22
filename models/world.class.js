@@ -14,6 +14,8 @@ bottleBar = new StatusBar('bottle', 50, 100);
 coinBar = new StatusBar('coin', 100, 100);
 throwableObjects = [];
 hitSound = new Audio('audio/glasssmash.wav');
+
+gameOverSound = new Audio('audio/game_over.flac');
 //gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
 
 IMAGES_GAMEOVER = [
@@ -128,6 +130,7 @@ draw() {
         this.character.isRemoved = true; 
         this.enemies.forEach(enemy => enemy.isRemoved = true);  // Set the isRemoved flag to true for the chicken
         this.gameOverScreen.startend();
+        this.gameOverSound.play();
         this.addToMap(this.gameOverScreen);
         }
 
@@ -137,7 +140,7 @@ draw() {
             this.gameWon = true;
             this.character.isRemoved = true;
             this.endboss.isRemoved = true;
-        }, 2000);
+        }, 12000);
     }
 
     if (this.gameWon) {

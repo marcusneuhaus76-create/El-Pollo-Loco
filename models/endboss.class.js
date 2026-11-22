@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     width = 250;
     y = 50;
     energy = 20;
-    
+    endbossBeatenSound = new Audio('audio/firemusic.wav'); // https://commons.wikimedia.org/wiki/File:Wagner_Fire_Music_from_Die_Walkure_01.wav
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -67,7 +67,8 @@ class Endboss extends MovableObject {
             setInterval(() => {
                 if (this.isDead()) {
                     this.setState('dead');   // setzt currentImage nur beim ersten Mal auf 0
-                    if (this.currentImage < this.IMAGES_DEAD.length) {
+                    if (this.currentImage < 7000 /200) {
+                        this.endbossBeatenSound.play();
                         this.playAnimation(this.IMAGES_DEAD);   // nächstes Todesbild
                     } else {
                         this.isRemoved = true;                  // alle Bilder gezeigt, jetzt ausblenden

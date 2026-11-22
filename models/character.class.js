@@ -101,7 +101,6 @@ class Character extends MovableObject {
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
-                    this.walkSound.play();
                     this.move();
                 }
 
@@ -125,6 +124,10 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
+            if (this.world.gameWon) {
+                this.snoreSound.pause();   // falls er gerade schnarcht
+                return;                    // sonst nichts mehr tun
+            }
             if (this.isDead()) {
                 if (this.state !== 'dead') {
                     this.dieSound.play();
@@ -141,17 +144,20 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isIdle() >= 6) {
+                this.walkSound.play();
+            } else if (this.isIdle() >= 15) {
                 this.setState('long_idle');
                 this.playAnimation(this.IMAGES_LONG_IDLE);
                 this.snoreSound.play();
-            } else if (this.isIdle() > 3) {
+            } else if (this.isIdle() > 5) {
                 this.setState('idle');
                 this.playAnimation(this.IMAGES_IDLE);
             }
     }, 60);
 }
     
+
+
 
     jump() {
         this.speedY = 30;
