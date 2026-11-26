@@ -69,6 +69,7 @@ class Endboss extends MovableObject {
                     this.setState('dead');   // setzt currentImage nur beim ersten Mal auf 0
                     if (this.currentImage < 7000 /200) {
                         this.endbossBeatenSound.play();
+                        this.gameSound.pause();
                         this.playAnimation(this.IMAGES_DEAD);   // nächstes Todesbild
                     } else {
                         this.isRemoved = true;                  // alle Bilder gezeigt, jetzt ausblenden

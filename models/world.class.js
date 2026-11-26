@@ -18,6 +18,7 @@ hitSound = new Audio('audio/glasssmash.wav');
 gameOverSound = new Audio('audio/game_over.flac'); //gameOverScreen = new Overlay('img/You won, you lost/Game Over.png');
 gameWonSound = new Audio('audio/te-deum.ogg');
 
+
 IMAGES_GAMEOVER = [
     'img/You won, you lost/You lost b.png',
     'img/You won, you lost/Game over.png',

@@ -9,6 +9,7 @@ class Character extends MovableObject {
     hurtSound = new Audio('audio/shortoww.wav');
     dieSound = new Audio('audio/die.wav');
     jumpSound = new Audio('audio/cartoonjump.wav');
+    gameSound = new Audio('audio/La_Cucaracha.mp3');
     
     
 
@@ -125,7 +126,8 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.world.gameWon) {
-                this.snoreSound.pause();   // falls er gerade schnarcht
+                this.snoreSound.pause(); 
+                this.gameSound.pause();  // falls er gerade schnarcht
                 return;                    // sonst nichts mehr tun
             }
             if (this.isDead()) {
@@ -133,25 +135,31 @@ class Character extends MovableObject {
                     this.dieSound.play();
                     this.setState('dead');
                     this.playAnimation(this.IMAGES_DEAD);
+                    this.gameSound.pause();
                 }
             } else if (this.isHurt()) {
                 this.setState('hurt');
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurtSound.play();
+                this.gameSound.play();
             } else if (this.isAboveGround()) {
                 this.setState('jumping');
                 this.playAnimation(this.IMAGES_JUMPING); 
+                this.gameSound.play();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);
                 this.walkSound.play();
+                this.gameSound.play();
             } else if (this.isIdle() >= 15) {
                 this.setState('long_idle');
                 this.playAnimation(this.IMAGES_LONG_IDLE);
                 this.snoreSound.play();
+                this.gameSound.play();
             } else if (this.isIdle() > 5) {
                 this.setState('idle');
                 this.playAnimation(this.IMAGES_IDLE);
+                this.gameSound.play();
             }
     }, 60);
 }
