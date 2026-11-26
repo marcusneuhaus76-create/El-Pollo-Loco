@@ -141,30 +141,37 @@ class Character extends MovableObject {
                 this.setState('hurt');
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurtSound.play();
-                this.gameSound.play();
+                this.playGameSound();
             } else if (this.isAboveGround()) {
                 this.setState('jumping');
                 this.playAnimation(this.IMAGES_JUMPING); 
-                this.gameSound.play();
+                this.playGameSound();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.setState('walking');
                 this.playAnimation(this.IMAGES_WALKING);
                 this.walkSound.play();
-                this.gameSound.play();
+                this.playGameSound();
             } else if (this.isIdle() >= 15) {
                 this.setState('long_idle');
                 this.playAnimation(this.IMAGES_LONG_IDLE);
                 this.snoreSound.play();
-                this.gameSound.play();
+                this.playGameSound();
             } else if (this.isIdle() > 5) {
                 this.setState('idle');
                 this.playAnimation(this.IMAGES_IDLE);
-                this.gameSound.play();
+                this.playGameSound();
             }
     }, 60);
 }
     
 
+playGameSound() {
+    if (this.world.endboss.isDead()) {
+        this.gameSound.pause();
+    } else {
+        this.gameSound.play();
+    }
+}
 
 
     jump() {

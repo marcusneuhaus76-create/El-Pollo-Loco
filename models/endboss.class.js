@@ -65,15 +65,21 @@ class Endboss extends MovableObject {
 
     animate() {
             setInterval(() => {
-                if (this.isDead()) {
-                    this.setState('dead');   // setzt currentImage nur beim ersten Mal auf 0
-                    if (this.currentImage < 7000 /200) {
-                        this.endbossBeatenSound.play();
-                        this.gameSound.pause();
-                        this.playAnimation(this.IMAGES_DEAD);   // nächstes Todesbild
-                    } else {
-                        this.isRemoved = true;                  // alle Bilder gezeigt, jetzt ausblenden
-                    }
+               if (this.isDead()) {
+                     if (this.state !== 'dead') {
+                 setTimeout(() => {
+                    this.endbossBeatenSound.play();
+                    }, 5000);   
+               
+                    // this.endbossBeatenSound.play();   // nur beim ersten Durchlauf
+                }
+                this.setState('dead');
+                if (this.currentImage < 7000 / 200) {
+                    this.playAnimation(this.IMAGES_DEAD);
+                } else {
+                    this.isRemoved = true;
+                }
+
                 } else if (this.isHurt()) {
                     this.setState('hurt');
                     this.playAnimation(this.IMAGES_HURT);
